@@ -46,7 +46,7 @@ if( $totalRows > 0){
                         </a>
                     </li>
 
-                    <?php for( $i=1 ; $i <= $totalPages ; $i++ ): ?>
+                    <?php for( $i=1 ; $i <= $totalPages ; $i++ ): ?>                            <!--所有頁碼-->
                         <li class="page-item <?= $page == $i ? 'active' : '' ?>">               <!--停在當前頁碼時，按鈕反白-->
                             <a class="page-link" href="?page=<?= $i ?>"> <?= $i  ?></a>
                         </li>
