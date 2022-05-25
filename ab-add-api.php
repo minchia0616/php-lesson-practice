@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . '/parts/connect-db.php';
+header('Content-Type: application/json');
 
 $output = [
     'success' => false,     //預設沒有新增成功
@@ -23,7 +24,7 @@ $stmt->execute([            //真正的執行新增資料
     $_POST['name'],
     $_POST['mobile'],
     $_POST['email'],
-    $_POST['birthday'],
+    empty($_POST['birthday']) ? NULL : $_POST['birthday'],
     $_POST['address'],
 ]);
 
