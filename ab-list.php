@@ -36,7 +36,7 @@ if( $totalRows > 0){
             <nav aria-label="Page navigation example">
                 <ul class="pagination">
                     <li class="page-item <?= $page==1 ? 'disable' : '' ?>">                 
-                        <a class="page-link" href="?page=1">                                    <!--往前到第一頁-->
+                        <a class="page-link" href="?page=1">
                             <i class="fa-solid fa-angles-left"></i>
                         </a>
                     </li>
@@ -46,11 +46,13 @@ if( $totalRows > 0){
                         </a>
                     </li>
 
-                    <?php for( $i=1 ; $i <= $totalPages ; $i++ ): ?>                            <!--所有頁碼-->
-                        <li class="page-item <?= $page == $i ? 'active' : '' ?>">               <!--停在當前頁碼時，按鈕反白-->
-                            <a class="page-link" href="?page=<?= $i ?>"> <?= $i  ?></a>
-                        </li>
-                    <?php endfor; ?>
+                    <?php for( $i = $page-5  ; $i <= $page + 5 ; $i++ ):                    //只顯示往前和往後的5頁
+                        if ($i >= 1 and $i <= $totalPages) : ?>
+                            <li class="page-item <?= $page == $i ? 'active' : '' ?>">
+                                <a class="page-link" href="?page=<?= $i ?>"> <?= $i  ?></a>
+                            </li>
+                        <?php endif; 
+                    endfor; ?>
 
                     
                     <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
@@ -59,7 +61,7 @@ if( $totalRows > 0){
                         </a>
                     </li>
                     <li class="page-item <?= $page == $totalPages ? 'disabled' : '' ?>">
-                        <a class="page-link" href="?page=<?= $totalPages ?>">                   <!--往後到最後一頁-->
+                        <a class="page-link" href="?page=<?= $totalPages ?>">
                             <i class="fa-solid fa-angles-right"></i>
                         </a>
                     </li>
