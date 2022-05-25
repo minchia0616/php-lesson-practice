@@ -52,7 +52,32 @@ $title = '新增通訊錄資料';
 <?php include __DIR__ . '/parts/scripts.php' ?>
 
 <script>
+    //先定義
+    const email_re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zAZ]{2,}))$/;
+    const mobile_re = /^09\d{2}-?\d{3}-?\d{3}$/;
+
+    const name_f = document.form1.name;
+    const email_f = document.form1.email;
+    const mobile_f = document.form1.mobile;
+
+    //前端的欄位格式檢查
     async function sendData() {
+        let iSPass = true ;                         //預設為通過檢查
+        if(name_f.value.length < 2){                //名字少於兩個字就不通過
+            alert('姓名至少兩個字');
+            isPass = false;
+        }
+        if(email_f.value && !email_re.test(email_f.value)){                //信箱有填可是格式錯誤
+            alert('信箱格式錯誤');
+            isPass = false;
+        }
+        if(mobile_f.value && !mobile_re.test(mobile_f.value)){             //手機有填可是格式錯誤
+            alert('手機號碼格式錯誤');
+            isPass = false;
+        }
+        if (!isPass) {      //只要其中一項沒有通過檢查就直接結束函式，表單不會送出
+            return;
+        }
         const fd = new FormData(document.form1);
         const r = await fetch('ab-add-api.php', {
             method: 'POST',
