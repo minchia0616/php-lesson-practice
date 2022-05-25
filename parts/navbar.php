@@ -1,13 +1,12 @@
 <?php
-if (!isset($pageName)) {
+if (!isset($pageName)) {                //若沒設定就給空字串
     $pageName = '';
 }
 ?>
 <style>
     .navbar .navbar-nav .nav-link.active {
         background-color: lightblue;
-        color: darkgray;
-        font-weight: 800;
+        color: black;
         border-radius: 5px;
     }
 </style>
