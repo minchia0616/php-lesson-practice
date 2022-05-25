@@ -1,28 +1,31 @@
 <?php require __DIR__ . '/parts/connect-db.php';
 
-$perPage = 20;  // 設定每一頁的資料數
+$pageName = 'ab-list';
+$title = '通訊錄列表';
 
-// 用戶要看第幾頁
-$page = isset($_GET['page']) ? intval($_GET['page']) : 1;       //表單沒特別設定就是$_GET的方法，有設定就轉換成整數，沒有就從1開始
+$perPage = 20;
+
+
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
 if ($page < 1) {
-    header('Location: ?page=1');                                //頁數小於1的話還是導向第一頁
+    header('Location: ?page=1');
     exit;
 }
 
 $t_sql = "SELECT COUNT(1) FROM `address_book`";
 $totalRows = $pdo->query($t_sql)->fetch(PDO::FETCH_NUM)[0];
-$totalPages = ceil($totalRows / $perPage);                      //總共幾筆除以一頁20筆，無條件進位得到總共有幾頁
+$totalPages = ceil($totalRows / $perPage); 
 
-$rows = [];                                                     //給定預設值
+$rows = [];
 
 if( $totalRows > 0){
-    if( $page > $totalPages ){                                  //若頁碼超過總頁數，導向最後一頁
+    if( $page > $totalPages ){
         header("Location: ?page=$totalPages");
         exit;
     }
 
-    $sql = sprintf("SELECT * FROM address_book LIMIT %s, %s", ($page - 1) * $perPage, $perPage);    //索引,幾筆 第二頁的索引從20開始，第三頁40開始...每頁取20筆資料
-    $rows = $pdo->query($sql)->fetchAll();                      //索引式陣列
+    $sql = sprintf("SELECT * FROM address_book LIMIT %s, %s", ($page - 1) * $perPage, $perPage);
+    $rows = $pdo->query($sql)->fetchAll();
 }
 
 
