@@ -5,6 +5,17 @@ $title = '新增通訊錄資料';
 ?>
 <?php include __DIR__ . '/parts/html-head.php' ?>
 <?php include __DIR__ . '/parts/navbar.php' ?>
+
+<style>
+    .form-control.red {
+        border: 1px solid red;
+    }
+
+    .form-text.red {
+        color: red;
+    }
+</style>
+
 <div class="container">
     <div class="row">
         <div class="col-md-6">
@@ -16,7 +27,7 @@ $title = '新增通訊錄資料';
                         <div class="mb-3">
                             <label for="name" class="form-label">* name</label>
                             <input type="text" class="form-control" id="name" name="name" required> <!-- required必填 -->
-                            <div class="form-text"></div>
+                            <div class="form-text">提示字元</div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">email</label>
@@ -65,7 +76,10 @@ $title = '新增通訊錄資料';
         let isPass = true;                      // 預設為通過檢查
 
         if (name_f.value.length < 2) {          // 名字少於兩個字就不通過
-            alert('姓名至少兩個字');
+            // alert('姓名至少兩個字');
+            name_f.classList.add('red');
+            name_f.nextElementSibling.classList.add('red');             //拿到input的下一個(提示字元)
+            // name_f.closest('.mb-3').querySelector('.form-text').classList.add('red');    closest往上找mb-3再往內找到form-text
             isPass = false;
         }
         if (email_f.value && !email_re.test(email_f.value)) {           // 信箱有填可是格式錯誤
