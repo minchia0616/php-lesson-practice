@@ -69,25 +69,44 @@ $title = '新增通訊錄資料';
     const email_f = document.form1.email;
     const mobile_f = document.form1.mobile;
 
+    const fields = [name_f,email_f,mobile_f];
+    const fieldTexts = [];
+    for(let f of fields){
+        fieldTexts.push(f.nextElementSibling);  // 使用陣列一個對一個拿到下一人的參照
+    }
+
 
     //前端的欄位格式檢查
     async function sendData() {
-        // TODO: 欄位檢查, 前端的檢查
+
+        for(let i in fields){                   // 讓欄位的外觀回復原來的狀態
+            fields[i].classList.remove('red');
+            fieldTexts[i].classList.remove('red');
+            fieldTexts[i].innerText='';
+        }
+
+        
         let isPass = true;                      // 預設為通過檢查
 
         if (name_f.value.length < 2) {          // 名字少於兩個字就不通過
-            // alert('姓名至少兩個字');
-            name_f.classList.add('red');
-            name_f.nextElementSibling.classList.add('red');             //拿到input的下一個(提示字元)
+            // name_f.classList.add('red');
+            // name_f.nextElementSibling.classList.add('red');                              //拿到input的下一個(提示字元)
             // name_f.closest('.mb-3').querySelector('.form-text').classList.add('red');    closest往上找mb-3再往內找到form-text
+            fields[0].classList.add('red');
+            fieldTexts[0].classList.add('red');
+            fieldTexts[0].innerText='姓名至少兩個字';
             isPass = false;
         }
         if (email_f.value && !email_re.test(email_f.value)) {           // 信箱有填可是格式錯誤
-            alert('email 格式錯誤');
+            fields[1].classList.add('red');
+            fieldTexts[1].classList.add('red');
+            fieldTexts[1].innerText='email 格式錯誤';
             isPass = false;
         }
         if (mobile_f.value && !mobile_re.test(mobile_f.value)) {        // 手機有填可是格式錯誤
-            alert('手機號碼格式錯誤');
+            fields[2].classList.add('red');
+            fieldTexts[2].classList.add('red');
+            fieldTexts[2].innerText='手機號碼格式錯誤';
             isPass = false;
         }
 
