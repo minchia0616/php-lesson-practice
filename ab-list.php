@@ -92,7 +92,7 @@ if( $totalRows > 0){
             <?php foreach ($rows as $r) : ?>
                 <tr>
                     <td>
-                        <a href="#"><i class="fa-solid fa-trash-can"></i></a>
+                        <a href="ab-delete.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-trash-can"></i></a>
                     </td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['name'] ?></td>
@@ -101,7 +101,7 @@ if( $totalRows > 0){
                     <td><?= $r['birthday'] ?></td>
                     <td><?= $r['address'] ?></td>
                     <td>
-                        <a href="#"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href="ab-edit.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                     </td>
                 </tr>
             <?php endforeach; ?>
