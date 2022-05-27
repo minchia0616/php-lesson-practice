@@ -1,4 +1,4 @@
-<?php require __DIR__ . '/parts/connect_db.php';
+<?php require __DIR__ . '/parts/connect-db.php';
 $pageName = 'ab-edit';
 $title = '編輯通訊錄資料';
 
@@ -37,27 +37,27 @@ if (empty($row)) {
                     <form name="form1" onsubmit="sendData();return false;" novalidate>
                         <div class="mb-3">
                             <label for="name" class="form-label">* name</label>
-                            <input type="text" class="form-control" id="name" name="name" required>
+                            <input type="text" class="form-control" id="name" name="name" required value="<?= htmlentities($row['name']) ?>">   <!-- 做跳脫 -->
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="email" class="form-label">email</label>
-                            <input type="email" class="form-control" id="email" name="email">
+                            <input type="email" class="form-control" id="email" name="email" value="<?= $row['email'] ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="mobile" class="form-label">mobile</label>
-                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}">
+                            <input type="text" class="form-control" id="mobile" name="mobile" pattern="09\d{8}" value="<?= $row['mobile'] ?>">
                             <div class="form-text red"></div>
                         </div>
                         <div class="mb-3">
                             <label for="birthday" class="form-label">birthday</label>
-                            <input type="date" class="form-control" id="birthday" name="birthday">
+                            <input type="date" class="form-control" id="birthday" name="birthday" value="<?= $row['birthday'] ?>">
                             <div class="form-text"></div>
                         </div>
                         <div class="mb-3">
                             <label for="address" class="form-label">address</label>
-                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"></textarea>
+                            <textarea class="form-control" name="address" id="address" cols="30" rows="3"><?= $row['address'] ?></textarea>
                             <div class="form-text"></div>
                         </div>
 
