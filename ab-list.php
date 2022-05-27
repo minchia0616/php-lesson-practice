@@ -92,7 +92,16 @@ if( $totalRows > 0){
             <?php foreach ($rows as $r) : ?>
                 <tr>
                     <td>
-                        <a href="ab-delete.php?sid=<?= $r['sid'] ?>"><i class="fa-solid fa-trash-can"></i></a>
+                        <!-- 方法一 -->
+                        <?php /*
+                        <a href="ab-delete.php?sid=<?= $r['sid'] ?>" onclick="return confirm('確定要刪除編號為<?= $r['sid'] ?>的資料嗎？')">
+                        <i class="fa-solid fa-trash-can"></i>
+                        </a>
+                        */ ?>
+                        <!-- 方法二使用js假標籤 -->
+                        <a href="javascript:delete_it(<?= $r['sid'] ?>)">
+                            <i class="fa-solid fa-trash-can"></i>
+                        </a>
                     </td>
                     <td><?= $r['sid'] ?></td>
                     <td><?= $r['name'] ?></td>
@@ -111,4 +120,15 @@ if( $totalRows > 0){
 </div>
 
 <?php include __DIR__ . '/parts/scripts.php' ?>
+<script>
+    function delete_it(sid){
+        if(confirm(`確定要刪除編號為${sid}的資料嗎？`)){
+            location.href = `ab-delete.php?sid=${sid}`;
+
+        }
+    }
+</script>
+
+
+
 <?php include __DIR__ . '/parts/html-foot.php' ?>
